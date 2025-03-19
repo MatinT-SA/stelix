@@ -45,7 +45,7 @@ function CreateCabinForm() {
   const { errors } = formState;
 
   function onSubmit(data) {
-    mutate(data);
+    mutate({ ...data, image: data.image[0] });
   }
 
   function onError(errors) {}
@@ -55,6 +55,7 @@ function CreateCabinForm() {
       <FormRow label="name" error={errors?.name?.message}>
         <Input
           type="text"
+          disabled={isCreating}
           id="name"
           {...register("name", { required: "This field is required" })}
         />
@@ -63,6 +64,7 @@ function CreateCabinForm() {
       <FormRow label="maxCapacity" error={errors?.maxCapacity?.message}>
         <Input
           type="number"
+          disabled={isCreating}
           id="maxCapacity"
           {...register("maxCapacity", {
             required: "This field is required",
@@ -77,6 +79,7 @@ function CreateCabinForm() {
       <FormRow label="regularPrice" error={errors?.regularPrice?.message}>
         <Input
           type="number"
+          disabled={isCreating}
           id="regularPrice"
           {...register("regularPrice", { required: "This field is required" })}
         />
@@ -85,6 +88,7 @@ function CreateCabinForm() {
       <FormRow label="discount" error={errors?.discount?.message}>
         <Input
           type="number"
+          disabled={isCreating}
           id="discount"
           defaultValue={0}
           {...register("discount", {
@@ -99,6 +103,7 @@ function CreateCabinForm() {
       <FormRow label="description" error={errors?.description?.message}>
         <Textarea
           type="number"
+          disabled={isCreating}
           id="description"
           defaultValue=""
           {...register("description", { required: "This field is required" })}
@@ -107,7 +112,11 @@ function CreateCabinForm() {
 
       <FormRow>
         <Label htmlFor="image">Cabin photo</Label>
-        <FileInput id="image" accept="image/*" />
+        <FileInput
+          id="image"
+          accept="image/*"
+          {...register("image", { required: "This field is required" })}
+        />
       </FormRow>
 
       <FormRow>
