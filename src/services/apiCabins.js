@@ -22,7 +22,7 @@ export async function deleteCabin(id) {
   return data;
 }
 
-export async function createEditCabin(newCabin, id) {
+export async function createUpdateCabin(newCabin, id) {
   const hasImagePath = newCabin.image?.startsWith?.(supabaseUrl);
 
   const imageName = `${Math.random()}-${newCabin.image.name}`.replaceAll(
@@ -55,14 +55,13 @@ export async function createEditCabin(newCabin, id) {
     query = query.insert([{ ...newCabin, image: imagePath }]);
   } else {
     query = query.update({ ...newCabin, image: imagePath }).eq("id", id);
-    if (hasImagePath) return data;
   }
 
   const { data, error } = await query.select().single();
 
   if (error) {
     console.error(error);
-    throw new Error("Cabin could not be created or edited");
+    throw new Error("Cabin could not be created or Updated");
   }
 
   return data;
