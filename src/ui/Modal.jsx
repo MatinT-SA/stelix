@@ -48,3 +48,13 @@ const Button = styled.button`
     color: var(--color-grey-500);
   }
 `;
+
+function Modal({ children }) {
+  return (
+    <StyledModal>
+      <div>{children}</div>
+    </StyledModal>
+  );
+}
+
+export default Modal;
