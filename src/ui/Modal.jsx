@@ -1,15 +1,8 @@
-import {
-  cloneElement,
-  createContext,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { cloneElement, createContext, useContext, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiXMark } from "react-icons/hi2";
-import { TbRulerOff } from "react-icons/tb";
 import styled from "styled-components";
+import { useOutsideClick } from "../hooks/useOutsideClick";
 
 const StyledModal = styled.div`
   position: fixed;
@@ -83,19 +76,8 @@ function Open({ children, opens: opensWindowName }) {
 
 function Window({ children, name }) {
   const { close, openName } = useContext(ModalContext);
-  const ref = useRef();
 
-  useEffect(() => {
-    function handleClick(e) {
-      if (ref.current && !ref.current.contains(e.target)) {
-        close();
-      }
-    }
-
-    document.addEventListener("click", handleClick, true);
-
-    return () => document.removeEventListener("click", handleClick, TbRulerOff);
-  }, [close]);
+  const ref = useOutsideClick(close);
 
   if (openName !== name) return null;
 
