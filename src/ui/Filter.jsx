@@ -33,3 +33,15 @@ const FilterButton = styled.button`
     color: var(--color-brand-50);
   }
 `;
+
+function Filter() {
+  return (
+    <StyledFilter>
+      <FilterButton>All</FilterButton>
+      <FilterButton>No discount</FilterButton>
+      <FilterButton>With discount</FilterButton>
+    </StyledFilter>
+  );
+}
+
+export default Filter;
