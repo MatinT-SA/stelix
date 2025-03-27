@@ -75,7 +75,7 @@ function CabinRow({ cabin }) {
       )}
 
       <div>
-        <button disabled={isCreating} onClick={handleDuplicate}>
+        <button disabled={isCreating}>
           <HiSquare2Stack />
         </button>
 
@@ -107,9 +107,13 @@ function CabinRow({ cabin }) {
           <Menus.Toggle id={cabinId} />
 
           <Menus.List id={cabinId}>
-            <Menus.Button>Duplicate</Menus.Button>
-            <Menus.Button>Edit</Menus.Button>
-            <Menus.Button>Delete</Menus.Button>
+            <Menus.Button icon={<HiSquare2Stack />} onClick={handleDuplicate}>
+              Duplicate
+            </Menus.Button>
+
+            <Menus.Button icon={<HiPencil />}>Edit</Menus.Button>
+
+            <Menus.Button icon={<HiTrash />}>Delete</Menus.Button>
           </Menus.List>
         </Menus.Menu>
       </div>
