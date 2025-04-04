@@ -27,8 +27,6 @@ function App() {
     },
   });
 
-  console.log("test for committer date");
-
   return (
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
