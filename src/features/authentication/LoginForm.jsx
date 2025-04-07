@@ -3,18 +3,21 @@ import Button from "../../ui/Button";
 import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import FormRowVertical from "../../ui/FormRowVertical";
-import { Login } from "../../services/apiAuth";
+import { login } from "../../services/apiAuth";
+import { useLogin } from "./useLogin";
 
 function LoginForm() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("matin@gmail.com");
+  const [password, setPassword] = useState("123456");
+
+  const { isLogin, login } = useLogin();
 
   function handleSubmit(e) {
     e.preventDefault();
 
     if (!email || !password) return;
 
-    Login({ email, password });
+    login({ email, password });
   }
 
   return (
@@ -27,6 +30,7 @@ function LoginForm() {
           autoComplete="username"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          disabled={isLogin}
         />
       </FormRowVertical>
       <FormRowVertical label="Password">
@@ -36,10 +40,13 @@ function LoginForm() {
           autoComplete="current-password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          disabled={isLogin}
         />
       </FormRowVertical>
       <FormRowVertical>
-        <Button size="large">Login</Button>
+        <Button size="large" disabled={isLogin}>
+          Login
+        </Button>
       </FormRowVertical>
     </Form>
   );
