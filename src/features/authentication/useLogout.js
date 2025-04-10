@@ -3,7 +3,7 @@ import { logout as logoutApi } from "../../services/apiAuth";
 import { useNavigate } from "react-router-dom";
 
 export function useLogout() {
-  const naivagate = useNavigate();
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
 
   const { isLoading: isLoggingOut, mutate: logout } = useMutation({
@@ -11,7 +11,7 @@ export function useLogout() {
 
     onSuccess: () => {
       queryClient.removeQueries();
-      naivagate("/login");
+      navigate("/login");
     },
   });
 
