@@ -98,6 +98,20 @@ export async function getStaysTodayActivity() {
   return data;
 }
 
+export async function createBooking(obj) {
+  const { data, error } = await supabase
+    .from("bookings")
+    .insert(obj)
+    .select()
+    .single();
+
+  if (error) {
+    console.error(error);
+    throw new Error("Booking could not be created");
+  }
+  return data;
+}
+
 export async function updateBooking(id, obj) {
   const { data, error } = await supabase
     .from("bookings")
