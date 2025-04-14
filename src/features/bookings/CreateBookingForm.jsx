@@ -9,6 +9,8 @@ import FormRow from "../../ui/FormRow";
 import Checkbox from "../../ui/Checkbox";
 
 import { useCreateBooking } from "./useCreateBooking";
+import { useCabins } from "../cabins/useCabins";
+import { useGuests } from "../guests/useGuests";
 
 const FormGrid = styled.div`
   display: grid;
@@ -44,6 +46,8 @@ const StyledSelect = styled.select`
 
 function CreateBookingForm({ onCloseModal }) {
   const { isCreating, createBooking } = useCreateBooking();
+  const { cabins } = useCabins();
+  const { guests } = useGuests();
 
   const { register, handleSubmit, reset, formState, watch } = useForm({
     defaultValues: {
@@ -92,18 +96,28 @@ function CreateBookingForm({ onCloseModal }) {
             {...register("cabinId", { required: "This field is required" })}
           >
             <option value="">Select cabin</option>
-            {/* map through your cabins here */}
+            {cabins?.map((cabin) => (
+              <option key={cabin.id} value={cabin.id}>
+                {cabin.name}
+              </option>
+            ))}
           </StyledSelect>
         </FormRow>
+
         <FormRow label="Guest" error={errors?.guestId?.message}>
           <StyledSelect
             disabled={isCreating}
             {...register("guestId", { required: "This field is required" })}
           >
             <option value="">Select guest</option>
-            {/* map through your guests here */}
+            {guests?.map((guest) => (
+              <option key={guest.id} value={guest.id}>
+                {guest.fullName}
+              </option>
+            ))}
           </StyledSelect>
         </FormRow>
+
         <FormRow label="Start Date" error={errors?.startDate?.message}>
           <Input
             disabled={isCreating}
