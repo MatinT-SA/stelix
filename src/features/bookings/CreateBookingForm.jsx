@@ -10,6 +10,13 @@ import Checkbox from "../../ui/Checkbox";
 
 import { useCreateBooking } from "./useCreateBooking";
 
+const FormGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.4rem 2.4rem;
+  align-items: start;
+`;
+
 const StyledSelect = styled.select`
   appearance: none;
   width: 100%;
@@ -38,7 +45,7 @@ const StyledSelect = styled.select`
 function CreateBookingForm({ onCloseModal }) {
   const { isCreating, createBooking } = useCreateBooking();
 
-  const { register, handleSubmit, reset, getValues, formState } = useForm({
+  const { register, handleSubmit, reset, formState, watch } = useForm({
     defaultValues: {
       status: "unconfirmed",
       hasBreakfast: false,
@@ -48,14 +55,24 @@ function CreateBookingForm({ onCloseModal }) {
 
   const { errors } = formState;
 
+  const startDate = watch("startDate");
+  const endDate = watch("endDate");
+  const cabinPrice = Number(watch("cabinPrice")) || 0;
+  const extrasPrice = Number(watch("extrasPrice")) || 0;
+  const totalPrice = cabinPrice + extrasPrice;
+
   function onSubmit(data) {
+    const start = new Date(data.startDate);
+    const end = new Date(data.endDate);
+    const numNights = Math.ceil((end - start) / (1000 * 60 * 60 * 24));
+
     const preparedData = {
       ...data,
       numGuests: Number(data.numGuests),
-      numNights: Number(data.numNights),
       cabinPrice: Number(data.cabinPrice),
       extrasPrice: Number(data.extrasPrice),
-      totalPrice: Number(data.totalPrice),
+      totalPrice: totalPrice,
+      numNights: numNights > 0 ? numNights : 0,
     };
 
     createBooking(preparedData, {
@@ -67,105 +84,109 @@ function CreateBookingForm({ onCloseModal }) {
   }
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} type="modal">
-      <FormRow label="Cabin" error={errors?.cabinId?.message}>
-        <StyledSelect
-          disabled={isCreating}
-          {...register("cabinId", { required: "This field is required" })}
-        >
-          <option value="">Select cabin</option>
-          {/* map through your cabins here */}
-        </StyledSelect>
-      </FormRow>
+    <Form onSubmit={handleSubmit(onSubmit)} type="modal" size="large">
+      <FormGrid>
+        <FormRow label="Cabin" error={errors?.cabinId?.message}>
+          <StyledSelect
+            disabled={isCreating}
+            {...register("cabinId", { required: "This field is required" })}
+          >
+            <option value="">Select cabin</option>
+            {/* map through your cabins here */}
+          </StyledSelect>
+        </FormRow>
+        <FormRow label="Guest" error={errors?.guestId?.message}>
+          <StyledSelect
+            disabled={isCreating}
+            {...register("guestId", { required: "This field is required" })}
+          >
+            <option value="">Select guest</option>
+            {/* map through your guests here */}
+          </StyledSelect>
+        </FormRow>
+        <FormRow label="Start Date" error={errors?.startDate?.message}>
+          <Input
+            disabled={isCreating}
+            type="date"
+            {...register("startDate", { required: "This field is required" })}
+          />
+        </FormRow>
+        <FormRow label="End Date" error={errors?.endDate?.message}>
+          <Input
+            disabled={isCreating}
+            type="date"
+            {...register("endDate", { required: "This field is required" })}
+          />
+        </FormRow>
 
-      <FormRow label="Guest" error={errors?.guestId?.message}>
-        <StyledSelect
-          disabled={isCreating}
-          {...register("guestId", { required: "This field is required" })}
-        >
-          <option value="">Select guest</option>
-          {/* map through your guests here */}
-        </StyledSelect>
-      </FormRow>
+        <FormRow label="Nights">
+          <Input
+            type="number"
+            disabled
+            readOnly
+            value={Math.max(
+              Math.ceil(
+                (new Date(endDate) - new Date(startDate)) /
+                  (1000 * 60 * 60 * 24)
+              ),
+              0
+            )}
+          />
+        </FormRow>
 
-      <FormRow label="Start Date" error={errors?.startDate?.message}>
-        <Input
-          disabled={isCreating}
-          type="date"
-          {...register("startDate", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="End Date" error={errors?.endDate?.message}>
-        <Input
-          disabled={isCreating}
-          type="date"
-          {...register("endDate", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Nights" error={errors?.numNights?.message}>
-        <Input
-          disabled={isCreating}
-          type="number"
-          {...register("numNights", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Guests" error={errors?.numGuests?.message}>
-        <Input
-          disabled={isCreating}
-          type="number"
-          {...register("numGuests", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Cabin Price" error={errors?.cabinPrice?.message}>
-        <Input
-          disabled={isCreating}
-          type="number"
-          {...register("cabinPrice", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Extras Price" error={errors?.extrasPrice?.message}>
-        <Input
-          disabled={isCreating}
-          type="number"
-          {...register("extrasPrice", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Total Price" error={errors?.totalPrice?.message}>
-        <Input
-          disabled={isCreating}
-          type="number"
-          {...register("totalPrice", { required: "This field is required" })}
-        />
-      </FormRow>
-
-      <FormRow label="Status" error={errors?.status?.message}>
-        <StyledSelect
-          disabled={isCreating}
-          {...register("status", { required: "This field is required" })}
-        >
-          <option value="unconfirmed">Unconfirmed</option>
-          <option value="checked-in">Checked-in</option>
-          <option value="checked-out">Checked-out</option>
-        </StyledSelect>
-      </FormRow>
-
-      <FormRow label="Has breakfast">
-        <Checkbox
-          disabled={isCreating}
-          id="hasBreakfast"
-          {...register("hasBreakfast")}
-        />
-      </FormRow>
-
-      <FormRow label="Is paid">
-        <Checkbox disabled={isCreating} id="isPaid" {...register("isPaid")} />
-      </FormRow>
+        <FormRow label="Guests" error={errors?.numGuests?.message}>
+          <Input
+            disabled={isCreating}
+            type="number"
+            {...register("numGuests", {
+              required: "This field is required",
+              min: { value: 1, message: "Must be at least 1" },
+            })}
+          />
+        </FormRow>
+        <FormRow label="Cabin Price" error={errors?.cabinPrice?.message}>
+          <Input
+            disabled={isCreating}
+            type="number"
+            {...register("cabinPrice", {
+              required: "This field is required",
+              min: { value: 0, message: "Must be at least 0" },
+            })}
+          />
+        </FormRow>
+        <FormRow label="Extras Price" error={errors?.extrasPrice?.message}>
+          <Input
+            disabled={isCreating}
+            type="number"
+            {...register("extrasPrice", {
+              required: "This field is required",
+              min: { value: 0, message: "Must be at least 0" },
+            })}
+          />
+        </FormRow>
+        <FormRow label="Total Price">
+          <Input type="number" readOnly disabled value={totalPrice} />
+        </FormRow>
+        <FormRow label="Status" error={errors?.status?.message}>
+          <StyledSelect
+            disabled={isCreating}
+            {...register("status", { required: "This field is required" })}
+          >
+            <option value="unconfirmed">Unconfirmed</option>
+            <option value="checked-in">Checked-in</option>
+          </StyledSelect>
+        </FormRow>
+        <FormRow label="Has breakfast">
+          <Checkbox
+            disabled={isCreating}
+            id="hasBreakfast"
+            {...register("hasBreakfast")}
+          />
+        </FormRow>
+        <FormRow label="Is paid">
+          <Checkbox disabled={isCreating} id="isPaid" {...register("isPaid")} />
+        </FormRow>
+      </FormGrid>
 
       <FormRow label="Observations" error={errors?.observations?.message}>
         <Textarea {...register("observations")} />
