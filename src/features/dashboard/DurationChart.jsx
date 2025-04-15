@@ -9,20 +9,15 @@ import {
   Tooltip,
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
+import { useEffect, useState } from "react";
 
-const StyledResponsiveContainer = styled(ResponsiveContainer)`
-  height: 240px;
+const ChartWrapper = styled.div`
   width: 100%;
+  height: 100%;
 
-  height: 240px;
-
-  @media (max-width: 768px) {
-    height: 200px;
-  }
-
-  @media (max-width: 480px) {
-    height: 180px;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 const ChartBox = styled.div`
@@ -33,6 +28,10 @@ const ChartBox = styled.div`
 
   padding: 2.4rem 3.2rem;
   grid-column: 3 / span 2;
+
+  @media (max-width: 1180px) {
+    padding: 2rem 1rem 2rem 1.5rem;
+  }
 
   & > *:first-child {
     margin-bottom: 1.6rem;
@@ -157,44 +156,76 @@ function prepareData(startData, stays) {
 function DurationChart({ confirmedStays }) {
   const { isDarkMode } = useDarkMode();
   const startData = isDarkMode ? startDataDark : startDataLight;
-
   const data = prepareData(startData, confirmedStays);
+
+  const [radii, setRadii] = useState({ inner: 85, outer: 110 });
+  const [legendWidth, setLegendWidth] = useState(30);
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+
+      if (width < 480) {
+        setRadii({ inner: 40, outer: 55 });
+        setLegendWidth(50);
+      } else if (width < 768) {
+        setRadii({ inner: 35, outer: 55 });
+        setLegendWidth(45);
+      } else if (width < 1215) {
+        setRadii({ inner: 40, outer: 65 });
+        setLegendWidth(40);
+      } else if (width < 1400) {
+        setRadii({ inner: 70, outer: 95 });
+        setLegendWidth(30);
+      } else {
+        setRadii({ inner: 85, outer: 110 });
+        setLegendWidth(30);
+      }
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   return (
     <ChartBox>
       <Heading as="h2">Stay duration summary</Heading>
 
-      <StyledResponsiveContainer height={240} width="100%">
-        <PieChart>
-          <Pie
-            data={data}
-            nameKey="duration"
-            dataKey="value"
-            innerRadius={85}
-            outerRadius={110}
-            cx="40%"
-            cy="50%"
-            paddingAngle={3}
-          >
-            {data.map((entry) => (
-              <Cell
-                fill={entry.color}
-                stroke={entry.color}
-                key={entry.duration}
-              />
-            ))}
-          </Pie>
-          <Tooltip />
-          <Legend
-            verticalAlign="middle"
-            align="right"
-            width="30%"
-            layout="vertical"
-            iconSize={15}
-            iconType="circle"
-          />
-        </PieChart>
-      </StyledResponsiveContainer>
+      <ChartWrapper>
+        <ResponsiveContainer width="100%" aspect={2}>
+          <PieChart>
+            <Pie
+              data={data}
+              nameKey="duration"
+              dataKey="value"
+              innerRadius={radii.inner}
+              outerRadius={radii.outer}
+              cx="40%"
+              cy="50%"
+              paddingAngle={3}
+            >
+              {data.map((entry) => (
+                <Cell
+                  fill={entry.color}
+                  stroke={entry.color}
+                  key={entry.duration}
+                />
+              ))}
+            </Pie>
+            <Tooltip />
+            <Legend
+              verticalAlign="middle"
+              align="right"
+              width={`${legendWidth}%`}
+              layout="vertical"
+              iconSize={15}
+              iconType="circle"
+            />
+          </PieChart>
+        </ResponsiveContainer>
+      </ChartWrapper>
     </ChartBox>
   );
 }

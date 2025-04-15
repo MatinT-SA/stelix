@@ -193,6 +193,12 @@ img {
   }
 }
 
+@media (max-width: 1315px){
+  html{
+    font-size: 55%;
+  }
+}
+
 `;
 
 export default GlobalStyle;
