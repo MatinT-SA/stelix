@@ -10,6 +10,21 @@ import {
 } from "recharts";
 import { useDarkMode } from "../../context/DarkModeContext";
 
+const StyledResponsiveContainer = styled(ResponsiveContainer)`
+  height: 240px;
+  width: 100%;
+
+  height: 240px;
+
+  @media (max-width: 768px) {
+    height: 200px;
+  }
+
+  @media (max-width: 480px) {
+    height: 180px;
+  }
+`;
+
 const ChartBox = styled.div`
   /* Box */
   background-color: var(--color-grey-0);
@@ -115,8 +130,6 @@ const startDataDark = [
 ];
 
 function prepareData(startData, stays) {
-  // A bit ugly code, but sometimes this is what it takes when working with real data 😅
-
   function incArrayValue(arr, field) {
     return arr.map((obj) =>
       obj.duration === field ? { ...obj, value: obj.value + 1 } : obj
@@ -151,7 +164,7 @@ function DurationChart({ confirmedStays }) {
     <ChartBox>
       <Heading as="h2">Stay duration summary</Heading>
 
-      <ResponsiveContainer height={240} width="100%">
+      <StyledResponsiveContainer height={240} width="100%">
         <PieChart>
           <Pie
             data={data}
@@ -181,7 +194,7 @@ function DurationChart({ confirmedStays }) {
             iconType="circle"
           />
         </PieChart>
-      </ResponsiveContainer>
+      </StyledResponsiveContainer>
     </ChartBox>
   );
 }

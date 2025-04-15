@@ -21,6 +21,10 @@ const Form = styled.form`
       background-color: var(--color-grey-0);
       border: 1px solid var(--color-grey-100);
       border-radius: var(--border-radius-md);
+
+      @media (max-width: 1400px) {
+        width: ${props.size === "large" ? "90rem" : "80rem"};
+      }
     `}
     
   overflow: hidden;

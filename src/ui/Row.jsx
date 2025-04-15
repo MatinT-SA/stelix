@@ -8,6 +8,10 @@ const Row = styled.div`
     css`
       justify-content: space-between;
       align-items: center;
+
+      @media (max-width: 1150px) {
+        justify-content: center;
+      }
     `}
 
   ${(props) =>
