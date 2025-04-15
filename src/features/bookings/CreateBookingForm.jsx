@@ -15,8 +15,8 @@ import { useGuests } from "../guests/useGuests";
 const FormGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 2.4rem 2.4rem;
-  align-items: start;
+  gap: 1.5rem;
+  align-items: center;
 `;
 
 const StyledSelect = styled.select`
