@@ -185,6 +185,14 @@ img {
   filter: grayscale(var(--image-grayscale)) opacity(var(--image-opacity));
 }
 
+/* Responsiveness */
+
+@media (min-width: 1800px){
+  html{
+    font-size: 85%;
+  }
+}
+
 `;
 
 export default GlobalStyle;
