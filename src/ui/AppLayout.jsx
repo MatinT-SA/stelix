@@ -10,10 +10,26 @@ const StyledAppLayout = styled.div`
   display: grid;
   grid-template-columns: 26rem 1fr;
   grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header header"
+    "sidebar main";
   height: 100vh;
+
+  @media (max-width: 1000px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const HeaderWrapper = styled.header`
+  grid-area: header;
+`;
+
+const SidebarWrapper = styled.aside`
+  grid-area: sidebar;
 `;
 
 const Main = styled.main`
+  grid-area: main;
   background-color: ${({ isDarkMode }) => (isDarkMode ? "#1a1a1a" : "#f8f6f2")};
   background-image: ${({ isDarkMode }) =>
     isDarkMode
@@ -37,8 +53,14 @@ function AppLayout() {
 
   return (
     <StyledAppLayout>
-      <Sidebar />
-      <Header />
+      <HeaderWrapper>
+        <Header />
+      </HeaderWrapper>
+
+      <SidebarWrapper>
+        <Sidebar />
+      </SidebarWrapper>
+
       <Main isDarkMode={isDarkMode}>
         <Container>
           <Outlet />
