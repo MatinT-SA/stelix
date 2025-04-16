@@ -15,6 +15,11 @@ const StyledTodayItem = styled.li`
   padding: 0.8rem 0;
   border-bottom: 1px solid var(--color-grey-100);
 
+  @media (max-width: 1200px) {
+    gap: 0.4rem;
+    font-size: 1.2rem;
+  }
+
   &:first-child {
     border-top: 1px solid var(--color-grey-100);
   }
