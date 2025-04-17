@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import { HiMenu, HiX } from "react-icons/hi";
-import MainNav from "./MainNav"; // Assuming you have a MainNav component for your links or navigation
+import MainNav from "./MainNav";
 import Logo from "../ui/Logo";
 
 // Sidebar styles
@@ -40,18 +40,9 @@ const CloseButton = styled.button`
   color: inherit;
   cursor: pointer;
   font-size: 2.4rem;
-`;
-
-const MenuButton = styled.button`
-  font-size: 2.4rem;
-  background: none;
-  border: none;
-  color: inherit;
-  cursor: pointer;
-  display: block;
 
   @media (min-width: 1000px) {
-    display: none; /* Hide on larger screens */
+    display: none;
   }
 `;
 
@@ -61,37 +52,20 @@ const SidebarContent = styled.div`
   gap: 1rem;
 `;
 
-function Sidebar() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  // Function to toggle the sidebar visibility
-  const toggleSidebar = () => {
-    console.log("Toggling sidebar", isOpen ? "Open" : "Closed"); // Debugging output
-    setIsOpen((prevState) => !prevState);
-  };
-
+function Sidebar({ isOpen, toggleSidebar }) {
   return (
-    <>
-      {/* Menu Button visible only on small screens */}
-      <MenuButton onClick={toggleSidebar}>
-        <HiMenu />
-      </MenuButton>
+    <SidebarContainer isOpen={isOpen}>
+      <SidebarHeader>
+        <Logo />
+        <CloseButton onClick={toggleSidebar}>
+          <HiX />
+        </CloseButton>
+      </SidebarHeader>
 
-      {/* Sidebar */}
-      <SidebarContainer isOpen={isOpen}>
-        <SidebarHeader>
-          <Logo /> {/* Assuming you have a Logo component */}
-          <CloseButton onClick={toggleSidebar}>
-            <HiX />
-          </CloseButton>
-        </SidebarHeader>
-
-        <SidebarContent>
-          <MainNav />{" "}
-          {/* Assuming you have a MainNav component for navigation links */}
-        </SidebarContent>
-      </SidebarContainer>
-    </>
+      <SidebarContent>
+        <MainNav />
+      </SidebarContent>
+    </SidebarContainer>
   );
 }
 

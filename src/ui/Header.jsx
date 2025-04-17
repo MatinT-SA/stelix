@@ -24,27 +24,25 @@ const HamburgerButton = styled.button`
   border: none;
   color: inherit;
   cursor: pointer;
+  position: fixed;
+  left: 2rem;
 
-  @media (max-width: 768px) {
-    display: block;
+  @media (min-width: 1000px) {
+    display: none;
   }
 `;
 
-function Header() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
-
+function Header({ onToggleSidebar }) {
   return (
-    <StyledHeader>
-      <HamburgerButton onClick={toggleSidebar}>
-        <GiHamburgerMenu />
-      </HamburgerButton>
-      <UserAvatar />
-      <HeaderMenu />
-    </StyledHeader>
+    <>
+      <StyledHeader>
+        <HamburgerButton onClick={onToggleSidebar}>
+          <GiHamburgerMenu />
+        </HamburgerButton>
+        <UserAvatar />
+        <HeaderMenu />
+      </StyledHeader>
+    </>
   );
 }
 

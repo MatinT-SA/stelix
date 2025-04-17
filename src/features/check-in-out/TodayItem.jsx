@@ -20,6 +20,10 @@ const StyledTodayItem = styled.li`
     font-size: 1.2rem;
   }
 
+  @media (max-width: 1000px) {
+    grid-template-columns: 9rem 3rem 12rem 1fr 9rem;
+  }
+
   &:first-child {
     border-top: 1px solid var(--color-grey-100);
   }

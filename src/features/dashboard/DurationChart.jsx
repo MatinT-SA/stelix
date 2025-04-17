@@ -169,8 +169,11 @@ function DurationChart({ confirmedStays }) {
         setRadii({ inner: 40, outer: 55 });
         setLegendWidth(50);
       } else if (width < 768) {
-        setRadii({ inner: 35, outer: 55 });
+        setRadii({ inner: 70, outer: 95 });
         setLegendWidth(45);
+      } else if (width < 1000) {
+        setRadii({ inner: 100, outer: 130 });
+        setLegendWidth(40);
       } else if (width < 1215) {
         setRadii({ inner: 40, outer: 65 });
         setLegendWidth(40);

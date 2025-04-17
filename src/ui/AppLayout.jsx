@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
@@ -16,7 +16,7 @@ const StyledAppLayout = styled.div`
   height: 100vh;
 
   @media (max-width: 1000px) {
-    grid-template-columns: 1fr;
+    grid-template-columns: auto;
   }
 `;
 
@@ -50,15 +50,20 @@ const Container = styled.div`
 
 function AppLayout() {
   const { isDarkMode } = useDarkMode();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  function toggleSidebar() {
+    setIsSidebarOpen((sidebar) => !sidebar);
+  }
 
   return (
     <StyledAppLayout>
       <HeaderWrapper>
-        <Header />
+        <Header onToggleSidebar={toggleSidebar} />
       </HeaderWrapper>
 
-      <SidebarWrapper>
-        <Sidebar />
+      <SidebarWrapper $isOpen={isSidebarOpen}>
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </SidebarWrapper>
 
       <Main isDarkMode={isDarkMode}>
