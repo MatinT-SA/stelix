@@ -1,10 +1,23 @@
+import styled from "styled-components";
 import SortBy from "../../ui/SortBy";
 import Filter from "../../ui/Filter";
 import TableOperations from "../../ui/TableOperations";
 
+const StyledTableOperations = styled(TableOperations)`
+  display: flex;
+  gap: 1rem; /* Adjust gap as needed */
+  align-items: center;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    align-items: stretch; /* Optional: makes children take full width */
+    gap: 1rem; /* Adjust gap for the column layout */
+  }
+`;
+
 function BookingTableOperations() {
   return (
-    <TableOperations>
+    <StyledTableOperations>
       <Filter
         filterField="status"
         options={[
@@ -26,7 +39,7 @@ function BookingTableOperations() {
           { value: "totalPrice-asc", label: "Sort by amount (low first)" },
         ]}
       />
-    </TableOperations>
+    </StyledTableOperations>
   );
 }
 
