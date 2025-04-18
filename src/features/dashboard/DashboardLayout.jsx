@@ -32,7 +32,7 @@ const StyledContainerStats = styled.div`
     gap: 2rem;
   }
 
-  @media (max-width: 750px) {
+  @media (max-width: 600px) {
     grid-template-columns: 1fr;
     grid-template-rows: auto auto auto auto;
   }

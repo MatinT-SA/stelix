@@ -5,6 +5,24 @@ import { Flag } from "../../ui/Flag";
 import Button from "../../ui/Button";
 import CheckoutButton from "./CheckoutButton";
 
+const FixedButton = styled(Button)`
+  width: 9rem;
+  display: inline-block;
+`;
+
+const GridAreaButtonWrapper = styled.div`
+  @media (max-width: 500px) {
+    grid-area: button;
+    display: flex;
+    justify-content: center;
+  }
+
+  & > * {
+    width: 9rem;
+    display: inline-block;
+  }
+`;
+
 const StyledTodayItem = styled.li`
   display: grid;
   grid-template-columns: 9rem 2rem 1fr 7rem 9rem;
@@ -22,6 +40,15 @@ const StyledTodayItem = styled.li`
 
   @media (max-width: 1000px) {
     grid-template-columns: 9rem 3rem 12rem 1fr 9rem;
+  }
+
+  @media (max-width: 500px) {
+    display: grid;
+    grid-template-columns: 23% 6% 50% 15%;
+    grid-template-areas:
+      "tag flag guest nights"
+      "button button button button";
+    row-gap: 1rem;
   }
 
   &:first-child {
@@ -47,16 +74,23 @@ function TodayItem({ activity }) {
       <div>{numNights} nights</div>
 
       {status === "unconfirmed" && (
-        <Button
-          size="small"
-          variation="primary"
-          as={Link}
-          to={`/checkin/${id}`}
-        >
-          Check in
-        </Button>
+        <GridAreaButtonWrapper>
+          <FixedButton
+            size="small"
+            variation="primary"
+            as={Link}
+            to={`/checkin/${id}`}
+          >
+            Check in
+          </FixedButton>
+        </GridAreaButtonWrapper>
       )}
-      {status === "checked-in" && <CheckoutButton bookingId={id} />}
+
+      {status === "checked-in" && (
+        <GridAreaButtonWrapper>
+          <CheckoutButton bookingId={id} />
+        </GridAreaButtonWrapper>
+      )}
     </StyledTodayItem>
   );
 }

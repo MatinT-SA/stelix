@@ -165,7 +165,7 @@ function DurationChart({ confirmedStays }) {
     const handleResize = () => {
       const width = window.innerWidth;
 
-      if (width < 480) {
+      if (width < 540) {
         setRadii({ inner: 40, outer: 55 });
         setLegendWidth(50);
       } else if (width < 768) {
