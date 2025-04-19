@@ -9,6 +9,7 @@ import Input from "../../ui/Input";
 
 import { useUser } from "./useUser";
 import { useUpdateUser } from "./useUpdateUser";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const ResponsiveFormRow = styled(FormRow)`
   @media (max-width: 1400px) {
@@ -21,6 +22,8 @@ const ResponsiveFormRow = styled(FormRow)`
 `;
 
 function UpdateUserDataForm() {
+  const isMobile = useMediaQuery("(max-width: 500px)");
+
   const {
     user: {
       email,
@@ -66,7 +69,7 @@ function UpdateUserDataForm() {
           disabled={isUpdating}
         />
       </ResponsiveFormRow>
-      <ResponsiveFormRow label="Avatar image">
+      <ResponsiveFormRow label={isMobile ? "Avatar" : "Avatar Image"}>
         <FileInput
           id="avatar"
           accept="image/*"

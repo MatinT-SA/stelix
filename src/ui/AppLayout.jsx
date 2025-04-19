@@ -45,6 +45,10 @@ const Main = styled.main`
       @media (max-width: 700px) {
         padding: 4rem 1rem;
       }
+
+      @media (max-width: 380px) {
+        padding: 3rem 0.5rem;
+      }
     `}
 `;
 
