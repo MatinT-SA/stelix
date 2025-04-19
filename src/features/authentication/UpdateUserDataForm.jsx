@@ -1,4 +1,5 @@
 import { useState } from "react";
+import styled from "styled-components";
 
 import Button from "../../ui/Button";
 import FileInput from "../../ui/FileInput";
@@ -8,6 +9,12 @@ import Input from "../../ui/Input";
 
 import { useUser } from "./useUser";
 import { useUpdateUser } from "./useUpdateUser";
+
+const ResponsiveFormRow = styled(FormRow)`
+  @media (max-width: 1400px) {
+    grid-template-columns: 1fr 2fr 1fr;
+  }
+`;
 
 function UpdateUserDataForm() {
   const {
@@ -43,10 +50,10 @@ function UpdateUserDataForm() {
 
   return (
     <Form onSubmit={handleSubmit}>
-      <FormRow label="Email address">
+      <ResponsiveFormRow label="Email address">
         <Input value={email} disabled />
-      </FormRow>
-      <FormRow label="Full name">
+      </ResponsiveFormRow>
+      <ResponsiveFormRow label="Full name">
         <Input
           type="text"
           value={fullName}
@@ -54,16 +61,16 @@ function UpdateUserDataForm() {
           id="fullName"
           disabled={isUpdating}
         />
-      </FormRow>
-      <FormRow label="Avatar image">
+      </ResponsiveFormRow>
+      <ResponsiveFormRow label="Avatar image">
         <FileInput
           id="avatar"
           accept="image/*"
           onChange={(e) => setAvatar(e.target.files[0])}
           disabled={isUpdating}
         />
-      </FormRow>
-      <FormRow>
+      </ResponsiveFormRow>
+      <ResponsiveFormRow>
         <Button
           type="reset"
           variation="secondary"
@@ -73,7 +80,7 @@ function UpdateUserDataForm() {
           Cancel
         </Button>
         <Button disabled={isUpdating}>Update account</Button>
-      </FormRow>
+      </ResponsiveFormRow>
     </Form>
   );
 }
