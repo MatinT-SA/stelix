@@ -13,7 +13,7 @@ import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const ResponsiveFormRow = styled(FormRow)`
   @media (max-width: 1400px) {
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 2fr 3fr 0.4fr;
   }
 
   @media (max-width: 700px) {

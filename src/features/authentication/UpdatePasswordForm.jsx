@@ -18,12 +18,17 @@ const ResponsiveFormRow = styled(FormRow)`
   }
 
   @media (max-width: 700px) {
-    grid-template-columns: 2fr 1.5fr;
+    grid-template-columns: 1fr 2fr;
+  }
+
+  @media (max-width: 410px) {
+    grid-template-columns: 2fr 1fr;
   }
 `;
 
 function UpdatePasswordForm() {
   const isMobile = useMediaQuery("(max-width: 700px)");
+  const isSmallMobile = useMediaQuery("(max-width: 410px)");
   const { register, handleSubmit, formState, getValues, reset } = useForm();
   const { errors } = formState;
 
@@ -37,7 +42,11 @@ function UpdatePasswordForm() {
     <Form onSubmit={handleSubmit(onSubmit)}>
       <ResponsiveFormRow
         label={
-          isMobile ? "New pass (+8 char)" : "New Password (min 8 characters)"
+          isSmallMobile
+            ? "Pass (+8)"
+            : isMobile
+            ? "New pass (+8 char)"
+            : "New Password (min 8 characters)"
         }
         error={errors?.password?.message}
       >
@@ -57,7 +66,7 @@ function UpdatePasswordForm() {
       </ResponsiveFormRow>
 
       <ResponsiveFormRow
-        label="Confirm password"
+        label={isSmallMobile ? "Confirm Pass" : "Confirm Password"}
         error={errors?.passwordConfirm?.message}
       >
         <Input
