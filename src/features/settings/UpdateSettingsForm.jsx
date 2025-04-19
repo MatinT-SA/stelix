@@ -1,9 +1,29 @@
+import styled from "styled-components";
 import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import Spinner from "../../ui/Spinner";
 import { useSettings } from "./useSettings";
 import { useUpdateSetting } from "./useUpdateSetting";
+
+const ResponsiveFormRow = styled(FormRow)`
+  @media (max-width: 1400px) {
+    grid-template-columns: 1.5fr 2fr 1fr;
+  }
+
+  @media (max-width: 1070px) {
+    grid-template-columns: 2fr 2fr 0.5fr;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1.5fr 2fr;
+  }
+
+  @media (max-width: 410px) {
+    grid-template-columns: 2fr 1fr;
+    font-size: 1.2rem;
+  }
+`;
 
 function UpdateSettingsForm() {
   const {
@@ -29,7 +49,7 @@ function UpdateSettingsForm() {
 
   return (
     <Form>
-      <FormRow label="Minimum nights/booking">
+      <ResponsiveFormRow label="Minimum nights/booking">
         <Input
           type="number"
           disabled={isUpdating}
@@ -37,8 +57,8 @@ function UpdateSettingsForm() {
           defaultValue={minBookingLength}
           onBlur={(e) => handleSetting(e, "minBookingLength")}
         />
-      </FormRow>
-      <FormRow label="Maximum nights/booking">
+      </ResponsiveFormRow>
+      <ResponsiveFormRow label="Maximum nights/booking">
         <Input
           type="number"
           disabled={isUpdating}
@@ -46,8 +66,8 @@ function UpdateSettingsForm() {
           defaultValue={maxBookingLength}
           onBlur={(e) => handleSetting(e, "maxBookingLength")}
         />
-      </FormRow>
-      <FormRow label="Maximum guests/booking">
+      </ResponsiveFormRow>
+      <ResponsiveFormRow label="Maximum guests/booking">
         <Input
           type="number"
           disabled={isUpdating}
@@ -55,8 +75,8 @@ function UpdateSettingsForm() {
           defaultValue={maxGuestsPerBooking}
           onBlur={(e) => handleSetting(e, "maxGuestsPerBooking")}
         />
-      </FormRow>
-      <FormRow label="Breakfast price">
+      </ResponsiveFormRow>
+      <ResponsiveFormRow label="Breakfast price">
         <Input
           type="number"
           disabled={isUpdating}
@@ -64,7 +84,7 @@ function UpdateSettingsForm() {
           defaultValue={breakfastPrice}
           onBlur={(e) => handleSetting(e, "breakfastPrice")}
         />
-      </FormRow>
+      </ResponsiveFormRow>
     </Form>
   );
 }

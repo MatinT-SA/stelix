@@ -14,6 +14,10 @@ const Form = styled.form`
       @media (max-width: 500px) {
         padding: 2.4rem 2rem;
       }
+
+      @media (max-width: 340px) {
+        padding: 2.4rem 1rem;
+      }
     `}
 
   ${(props) =>
