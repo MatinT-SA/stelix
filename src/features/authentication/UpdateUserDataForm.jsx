@@ -14,6 +14,10 @@ const ResponsiveFormRow = styled(FormRow)`
   @media (max-width: 1400px) {
     grid-template-columns: 1fr 2fr 1fr;
   }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1fr 2fr;
+  }
 `;
 
 function UpdateUserDataForm() {

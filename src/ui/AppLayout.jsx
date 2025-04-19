@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import Uploader from "../data/Uploader";
 import { useDarkMode } from "../context/DarkModeContext";
 
@@ -38,6 +38,14 @@ const Main = styled.main`
 
   padding: 4rem 4.8rem 6.4rem;
   overflow-y: scroll;
+
+  ${({ isAccountPage }) =>
+    isAccountPage &&
+    css`
+      @media (max-width: 700px) {
+        padding: 4rem 1rem;
+      }
+    `}
 `;
 
 const Container = styled.div`
@@ -66,7 +74,7 @@ function AppLayout() {
         <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
       </SidebarWrapper>
 
-      <Main isDarkMode={isDarkMode}>
+      <Main isAccountPage={true} isDarkMode={isDarkMode}>
         <Container>
           <Outlet />
         </Container>
