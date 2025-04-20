@@ -12,6 +12,24 @@ import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
 
+const ScrollContainer = styled.div`
+  @media (max-width: 800px) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+
+    background-color: var(--color-grey-0); // ensure background is white
+    width: 100vw; // make container full screen width
+    box-sizing: border-box; // in case you have padding
+  }
+`;
+
+const InnerContent = styled.div`
+  display: inline-block; // or block depending on layout
+  min-width: max-content; // ensures content takes full width
+  background-color: inherit; // inherit the background
+`;
+
 const StyledBookingDataBox = styled.section`
   /* Box */
   background-color: var(--color-grey-0);
@@ -19,6 +37,16 @@ const StyledBookingDataBox = styled.section`
   border-radius: var(--border-radius-md);
 
   overflow: hidden;
+  width: 100%;
+  overflow-x: auto;
+
+  @media (max-width: 800px) {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+  }
+
+  -webkit-overflow-scrolling: touch;
 `;
 
 const Header = styled.header`
@@ -121,65 +149,69 @@ function BookingDataBox({ booking }) {
 
   return (
     <StyledBookingDataBox>
-      <Header>
-        <div>
-          <HiOutlineHomeModern />
+      <InnerContent>
+        <Header>
+          <div>
+            <HiOutlineHomeModern />
+            <p>
+              {numNights} nights in Cabin <span>{cabinName}</span>
+            </p>
+          </div>
+
           <p>
-            {numNights} nights in Cabin <span>{cabinName}</span>
+            {format(new Date(startDate), "EEE, MMM dd yyyy")} (
+            {isToday(new Date(startDate))
+              ? "Today"
+              : formatDistanceFromNow(startDate)}
+            ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
           </p>
-        </div>
+        </Header>
 
-        <p>
-          {format(new Date(startDate), "EEE, MMM dd yyyy")} (
-          {isToday(new Date(startDate))
-            ? "Today"
-            : formatDistanceFromNow(startDate)}
-          ) &mdash; {format(new Date(endDate), "EEE, MMM dd yyyy")}
-        </p>
-      </Header>
+        <Section>
+          <Guest>
+            {countryFlag && (
+              <Flag src={countryFlag} alt={`Flag of ${country}`} />
+            )}
+            <p>
+              {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
+            </p>
+            <span>&bull;</span>
+            <p>{email}</p>
+            <span>&bull;</span>
+            <p>National ID {nationalID}</p>
+          </Guest>
 
-      <Section>
-        <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
-          <p>
-            {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
-          </p>
-          <span>&bull;</span>
-          <p>{email}</p>
-          <span>&bull;</span>
-          <p>National ID {nationalID}</p>
-        </Guest>
+          {observations && (
+            <DataItem
+              icon={<HiOutlineChatBubbleBottomCenterText />}
+              label="Observations"
+            >
+              {observations}
+            </DataItem>
+          )}
 
-        {observations && (
-          <DataItem
-            icon={<HiOutlineChatBubbleBottomCenterText />}
-            label="Observations"
-          >
-            {observations}
-          </DataItem>
-        )}
-
-        <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
-          {hasBreakfast ? "Yes" : "No"}
-        </DataItem>
-
-        <Price isPaid={isPaid}>
-          <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
-            {formatCurrency(totalPrice)}
-
-            {hasBreakfast &&
-              ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
-                extrasPrice
-              )} breakfast)`}
+          <DataItem icon={<HiOutlineCheckCircle />} label="Breakfast included?">
+            {hasBreakfast ? "Yes" : "No"}
           </DataItem>
 
-          <p>{isPaid ? "Paid" : "Will pay at property"}</p>
-        </Price>
-      </Section>
+          <Price isPaid={isPaid}>
+            <DataItem icon={<HiOutlineCurrencyDollar />} label={`Total price`}>
+              {formatCurrency(totalPrice)}
 
-      <Footer>
-        <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
-      </Footer>
+              {hasBreakfast &&
+                ` (${formatCurrency(cabinPrice)} cabin + ${formatCurrency(
+                  extrasPrice
+                )} breakfast)`}
+            </DataItem>
+
+            <p>{isPaid ? "Paid" : "Will pay at property"}</p>
+          </Price>
+        </Section>
+
+        <Footer>
+          <p>Booked {format(new Date(created_at), "EEE, MMM dd yyyy, p")}</p>
+        </Footer>
+      </InnerContent>
     </StyledBookingDataBox>
   );
 }
