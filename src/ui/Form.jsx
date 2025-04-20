@@ -34,17 +34,27 @@ const Form = styled.form`
         width: ${props.size === "large" ? "90rem" : "80rem"};
       }
 
+      @media (max-width: 900px) {
+        width: ${props.size === "large" ? "80rem" : "60rem"};
+      }
+
       @media (max-width: 800px) {
-        width: ${props.size === "large" ? "90rem" : "60rem"};
+        width: ${props.size === "large" ? "70rem" : "60rem"};
+        padding: 1rem;
+      }
+
+      @media (max-width: 650px) {
+        height: ${props.size === "large" && "75vh"};
+        overflow-y: scroll;
       }
 
       @media (max-width: 600px) {
-        width: ${props.size === "large" ? "90rem" : "40rem"};
+        width: ${props.size === "large" ? "60rem" : "40rem"};
         padding: 0.5rem 1.5rem;
       }
 
       @media (max-width: 400px) {
-        width: ${props.size === "large" ? "90rem" : "35rem"};
+        width: ${props.size === "large" ? "50rem" : "35rem"};
         padding: 0.5rem 1.5rem;
       }
     `}

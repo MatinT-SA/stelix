@@ -17,6 +17,10 @@ const FormGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 1.5rem;
   align-items: center;
+
+  @media (max-width: 650px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledSelect = styled.select`

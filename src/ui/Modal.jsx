@@ -15,6 +15,10 @@ const StyledModal = styled.div`
   padding: 3.2rem 4rem;
   transition: all 0.5s;
 
+  @media (max-width: 700px) {
+    padding: 4rem 1rem;
+  }
+
   @media (max-width: 400px) {
     padding: 4.5rem 0.5rem;
   }
