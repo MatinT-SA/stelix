@@ -4,6 +4,26 @@ import Form from "../../ui/Form";
 import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import { useSignup } from "./useSignup";
+import styled from "styled-components";
+
+const ResponsiveFormRow = styled(FormRow)`
+  @media (max-width: 1400px) {
+    grid-template-columns: 2fr 2fr 1fr;
+  }
+
+  @media (max-width: 1070px) {
+    grid-template-columns: 2fr 2fr 0.5fr;
+  }
+
+  @media (max-width: 700px) {
+    grid-template-columns: 1.5fr 2fr;
+  }
+
+  @media (max-width: 410px) {
+    grid-template-columns: 2fr 1fr;
+    font-size: 1.2rem;
+  }
+`;
 
 function SignupForm() {
   const { isSigningUp, signup } = useSignup();
@@ -16,16 +36,16 @@ function SignupForm() {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <FormRow label="Full name" error={errors?.fullName?.message}>
+      <ResponsiveFormRow label="Full name" error={errors?.fullName?.message}>
         <Input
           type="text"
           id="fullName"
           disabled={isSigningUp}
           {...register("fullName", { required: "This field is required" })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="Email address" error={errors?.email?.message}>
+      <ResponsiveFormRow label="Email address" error={errors?.email?.message}>
         <Input
           type="email"
           id="email"
@@ -38,9 +58,9 @@ function SignupForm() {
             },
           })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow
+      <ResponsiveFormRow
         label="Password (min 8 characters)"
         error={errors?.password?.message}
       >
@@ -56,9 +76,12 @@ function SignupForm() {
             },
           })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="Repeat password" error={errors?.passwordConfirm?.message}>
+      <ResponsiveFormRow
+        label="Repeat password"
+        error={errors?.passwordConfirm?.message}
+      >
         <Input
           type="password"
           id="passwordConfirm"
@@ -69,9 +92,9 @@ function SignupForm() {
               value === getValues().password || "Passwords don't match",
           })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow>
+      <ResponsiveFormRow>
         <Button
           onClick={reset}
           variation="secondary"
@@ -81,7 +104,7 @@ function SignupForm() {
           Cancel
         </Button>
         <Button disabled={isSigningUp}>Create new user</Button>
-      </FormRow>
+      </ResponsiveFormRow>
     </Form>
   );
 }
