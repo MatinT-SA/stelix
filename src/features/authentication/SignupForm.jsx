@@ -5,6 +5,7 @@ import FormRow from "../../ui/FormRow";
 import Input from "../../ui/Input";
 import { useSignup } from "./useSignup";
 import styled from "styled-components";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const ResponsiveFormRow = styled(FormRow)`
   @media (max-width: 1400px) {
@@ -19,13 +20,17 @@ const ResponsiveFormRow = styled(FormRow)`
     grid-template-columns: 1.5fr 2fr;
   }
 
+  @media (max-width: 550px) {
+    grid-template-columns: 1.8fr 2fr;
+  }
+
   @media (max-width: 410px) {
     grid-template-columns: 2fr 1fr;
-    font-size: 1.2rem;
   }
 `;
 
 function SignupForm() {
+  const isSmallMobile = useMediaQuery("(max-width: 450px)");
   const { isSigningUp, signup } = useSignup();
   const { register, formState, getValues, handleSubmit, reset } = useForm();
   const { errors } = formState;
@@ -61,7 +66,7 @@ function SignupForm() {
       </ResponsiveFormRow>
 
       <ResponsiveFormRow
-        label="Password (min 8 characters)"
+        label={isSmallMobile ? "Pass (+8 char)" : "Password (min 8 characters)"}
         error={errors?.password?.message}
       >
         <Input
