@@ -37,6 +37,16 @@ const Form = styled.form`
       @media (max-width: 800px) {
         width: ${props.size === "large" ? "90rem" : "60rem"};
       }
+
+      @media (max-width: 600px) {
+        width: ${props.size === "large" ? "90rem" : "40rem"};
+        padding: 0.5rem 1.5rem;
+      }
+
+      @media (max-width: 400px) {
+        width: ${props.size === "large" ? "90rem" : "35rem"};
+        padding: 0.5rem 1.5rem;
+      }
     `}
     
   overflow: hidden;

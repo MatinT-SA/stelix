@@ -8,6 +8,13 @@ import Textarea from "../../ui/Textarea";
 import FormRow from "../../ui/FormRow";
 import { useCreateCabin } from "./useCreateCabin";
 import { useUpdateCabin } from "./useUpdateCabin";
+import styled from "styled-components";
+
+const ResponsiveFormRow = styled(FormRow)`
+  @media (max-width: 600px) {
+    grid-template-columns: 9rem 1fr;
+  }
+`;
 
 function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
   const { id: editId, ...editValues } = cabinToEdit;
@@ -56,16 +63,19 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
       onSubmit={handleSubmit(onSubmit, onError)}
       type={onCloseModal ? "modal" : "regular"}
     >
-      <FormRow label="name" error={errors?.name?.message}>
+      <ResponsiveFormRow label="name" error={errors?.name?.message}>
         <Input
           type="text"
           disabled={isWorking}
           id="name"
           {...register("name", { required: "This field is required" })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="maxCapacity" error={errors?.maxCapacity?.message}>
+      <ResponsiveFormRow
+        label="maxCapacity"
+        error={errors?.maxCapacity?.message}
+      >
         <Input
           type="number"
           disabled={isWorking}
@@ -78,18 +88,21 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             },
           })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="regularPrice" error={errors?.regularPrice?.message}>
+      <ResponsiveFormRow
+        label="regularPrice"
+        error={errors?.regularPrice?.message}
+      >
         <Input
           type="number"
           disabled={isWorking}
           id="regularPrice"
           {...register("regularPrice", { required: "This field is required" })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="discount" error={errors?.discount?.message}>
+      <ResponsiveFormRow label="discount" error={errors?.discount?.message}>
         <Input
           type="number"
           disabled={isWorking}
@@ -102,9 +115,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
               "Discound should be less than regular price",
           })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow label="description" error={errors?.description?.message}>
+      <ResponsiveFormRow
+        label="description"
+        error={errors?.description?.message}
+      >
         <Textarea
           type="number"
           disabled={isWorking}
@@ -112,9 +128,9 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           defaultValue=""
           {...register("description", { required: "This field is required" })}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow>
+      <ResponsiveFormRow>
         <FileInput
           id="image"
           accept="image/*"
@@ -123,9 +139,9 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
             isEditSession ? false : { required: "This field is required" }
           )}
         />
-      </FormRow>
+      </ResponsiveFormRow>
 
-      <FormRow>
+      <ResponsiveFormRow>
         <Button
           variation="secondary"
           type="reset"
@@ -136,7 +152,7 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         <Button disabled={isWorking}>
           {isEditSession ? "Update Cabin" : "Create New Cabin"}
         </Button>
-      </FormRow>
+      </ResponsiveFormRow>
     </Form>
   );
 }
