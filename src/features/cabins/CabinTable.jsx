@@ -5,6 +5,18 @@ import Table from "../../ui/Table";
 import Menus from "../../ui/Menus";
 import { useSearchParams } from "react-router-dom";
 import Empty from "../../ui/Empty";
+import styled from "styled-components";
+
+const ScrollWrapper = styled.div`
+  width: 100%;
+  overflow-x: auto;
+
+  @media (min-width: 801px) {
+    overflow-x: unset;
+  }
+
+  -webkit-overflow-scrolling: touch;
+`;
 
 function CabinTable() {
   const { isLoading, cabins } = useCabins();
@@ -34,21 +46,23 @@ function CabinTable() {
 
   return (
     <Menus>
-      <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
-        <Table.Header role="row">
-          <div></div>
-          <div>Cabin</div>
-          <div>Capacity</div>
-          <div>Price</div>
-          <div>Discount</div>
-          <div></div>
-        </Table.Header>
+      <ScrollWrapper>
+        <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+          <Table.Header role="row">
+            <div></div>
+            <div>Cabin</div>
+            <div>Capacity</div>
+            <div>Price</div>
+            <div>Discount</div>
+            <div></div>
+          </Table.Header>
 
-        <Table.Body
-          data={sortedCabins}
-          render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
-        />
-      </Table>
+          <Table.Body
+            data={sortedCabins}
+            render={(cabin) => <CabinRow cabin={cabin} key={cabin.id} />}
+          />
+        </Table>
+      </ScrollWrapper>
     </Menus>
   );
 }

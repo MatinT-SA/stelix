@@ -8,10 +8,6 @@ import { useBookings } from "./useBookings";
 import Pagination from "../../ui/Pagination";
 import styled from "styled-components";
 
-const StyledTable = styled(Table)`
-  min-width: 1700px;
-`;
-
 const ScrollWrapper = styled.div`
   width: 100%;
   overflow-x: auto;

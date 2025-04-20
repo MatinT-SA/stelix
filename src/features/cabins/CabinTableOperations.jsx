@@ -2,10 +2,23 @@ import React from "react";
 import TableOperations from "../../ui/TableOperations";
 import Filter from "../../ui/Filter";
 import SortBy from "../../ui/SortBy";
+import styled from "styled-components";
+
+const StyledTableOperations = styled(TableOperations)`
+  display: flex;
+  gap: 1rem; /* Adjust gap as needed */
+  align-items: center;
+
+  @media (max-width: 650px) {
+    flex-direction: column;
+    align-items: stretch; /* Optional: makes children take full width */
+    gap: 1rem; /* Adjust gap for the column layout */
+  }
+`;
 
 function CabinTableOperations() {
   return (
-    <TableOperations>
+    <StyledTableOperations>
       <Filter
         filterField="discount"
         options={[
@@ -25,7 +38,7 @@ function CabinTableOperations() {
           { value: "maxCapacity-desc", label: "Sort by capacity (high first)" },
         ]}
       />
-    </TableOperations>
+    </StyledTableOperations>
   );
 }
 
