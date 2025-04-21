@@ -22,6 +22,7 @@ const StyledAppLayout = styled.div`
 
 const HeaderWrapper = styled.header`
   grid-area: header;
+  z-index: 10;
 `;
 
 const SidebarWrapper = styled.aside`

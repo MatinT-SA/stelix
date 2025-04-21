@@ -35,6 +35,29 @@ function App() {
         <ReactQueryDevtools initialIsOpen={false} />
 
         <GlobalStyles />
+
+        <Toaster
+          position="top-center"
+          gutter={12}
+          containerStyle={{ margin: "8px" }}
+          toastOptions={{
+            success: {
+              duration: 3000,
+            },
+            error: {
+              duration: 5000,
+            },
+            style: {
+              fontSize: "1.6rem",
+              zIndex: "99999",
+              maxWidth: "500px",
+              padding: "1.6rem 2.4rem",
+              backgroundColor: "var(--color-grey-0)",
+              color: "var(--color-grey-700)",
+            },
+          }}
+        />
+
         <BrowserRouter>
           <Routes>
             <Route
@@ -59,27 +82,6 @@ function App() {
             <Route path="*" element={<PageNotFound />} />
           </Routes>
         </BrowserRouter>
-
-        <Toaster
-          position="top-center"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 5000,
-            },
-            style: {
-              fontSize: "1.6rem",
-              maxWidth: "500px",
-              padding: "1.6rem 2.4rem",
-              backgroundColor: "var(--color-grey-0)",
-              color: "var(--color-grey-700)",
-            },
-          }}
-        />
       </QueryClientProvider>
     </DarkModeProvider>
   );
