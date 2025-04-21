@@ -11,6 +11,7 @@ import DataItem from "../../ui/DataItem";
 import { Flag } from "../../ui/Flag";
 
 import { formatDistanceFromNow, formatCurrency } from "../../utils/helpers";
+import { useMediaQuery } from "../../hooks/useMediaQuery";
 
 const StyledBookingDataBox = styled.section`
   /* Box */
@@ -19,6 +20,36 @@ const StyledBookingDataBox = styled.section`
   border-radius: var(--border-radius-md);
 
   overflow: hidden;
+`;
+
+const StyledSpanBull1 = styled.span`
+  @media (max-width: 750px) {
+    display: none;
+  }
+`;
+
+const StyledSpanBull2 = styled.span`
+  @media (max-width: 750px) {
+    display: none;
+  }
+`;
+
+const StyledP = styled.p`
+  @media (max-width: 800px) {
+    font-size: 1.4rem;
+  }
+`;
+
+const StyledGuestName = styled.p`
+  grid-area: guest;
+`;
+
+const StyledGuestEmail = styled.p`
+  grid-area: email;
+`;
+
+const StyledGuestNationalId = styled.p`
+  grid-area: nationalId;
 `;
 
 const Header = styled.header`
@@ -31,9 +62,24 @@ const Header = styled.header`
   align-items: center;
   justify-content: space-between;
 
+  @media (max-width: 800px) {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+  }
+
+  @media (max-width: 420px) {
+    padding: 0.5rem 1rem;
+    flex-direction: column;
+    font-size: 1.4rem;
+  }
+
   svg {
     height: 3.2rem;
     width: 3.2rem;
+
+    @media (max-width: 580px) {
+      display: none;
+    }
   }
 
   & div:first-child {
@@ -53,6 +99,14 @@ const Header = styled.header`
 
 const Section = styled.section`
   padding: 3.2rem 4rem 1.2rem;
+
+  @media (max-width: 800px) {
+    padding: 3rem 1.5rem 1rem;
+  }
+`;
+
+const StyledFlag = styled(Flag)`
+  grid-area: flag;
 `;
 
 const Guest = styled.div`
@@ -61,6 +115,15 @@ const Guest = styled.div`
   gap: 1.2rem;
   margin-bottom: 1.6rem;
   color: var(--color-grey-500);
+
+  @media (max-width: 750px) {
+    display: grid;
+    grid-template-areas:
+      "flag guest email"
+      "nationalId nationalId nationalId";
+    gap: 1rem 1.5rem;
+    justify-items: center;
+  }
 
   & p:first-of-type {
     font-weight: 500;
@@ -124,9 +187,9 @@ function BookingDataBox({ booking }) {
       <Header>
         <div>
           <HiOutlineHomeModern />
-          <p>
+          <StyledP>
             {numNights} nights in Cabin <span>{cabinName}</span>
-          </p>
+          </StyledP>
         </div>
 
         <p>
@@ -140,14 +203,18 @@ function BookingDataBox({ booking }) {
 
       <Section>
         <Guest>
-          {countryFlag && <Flag src={countryFlag} alt={`Flag of ${country}`} />}
-          <p>
+          {countryFlag && (
+            <StyledFlag src={countryFlag} alt={`Flag of ${country}`} />
+          )}
+          <StyledGuestName>
             {guestName} {numGuests > 1 ? `+ ${numGuests - 1} guests` : ""}
-          </p>
-          <span>&bull;</span>
-          <p>{email}</p>
-          <span>&bull;</span>
-          <p>National ID {nationalID}</p>
+          </StyledGuestName>
+          <StyledSpanBull1>&bull;</StyledSpanBull1>
+          <StyledGuestEmail>{email}</StyledGuestEmail>
+          <StyledSpanBull2>&bull;</StyledSpanBull2>
+          <StyledGuestNationalId>
+            National ID {nationalID}
+          </StyledGuestNationalId>
         </Guest>
 
         {observations && (
