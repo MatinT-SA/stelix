@@ -18,15 +18,17 @@ const ChartWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
 const ChartBox = styled.div`
-  /* Box */
-  background-color: var(--color-grey-0);
-  border: 1px solid var(--color-grey-100);
-  border-radius: var(--border-radius-md);
-
+  background-color: ${({ theme }) =>
+    theme === "dark" ? "rgba(30, 30, 30, 0.9)" : "rgba(255, 255, 255, 0.95)"};
+  border: 2px solid ${({ theme }) => (theme === "dark" ? "#444" : "#ddd")};
+  border-radius: 1.6rem;
   padding: 2.4rem 3.2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+
   grid-column: 3 / span 2;
 
   @media (max-width: 1180px) {
@@ -34,98 +36,37 @@ const ChartBox = styled.div`
   }
 
   & > *:first-child {
-    margin-bottom: 1.6rem;
+    margin-bottom: 2.4rem;
+    font-size: 2rem;
   }
 
   & .recharts-pie-label-text {
-    font-weight: 600;
+    font-weight: 500;
+    fill: ${({ theme }) => (theme === "dark" ? "#ddd" : "#222")};
+    font-family: "Poppins", sans-serif;
   }
 `;
 
 const startDataLight = [
-  {
-    duration: "1 night",
-    value: 0,
-    color: "#ef4444",
-  },
-  {
-    duration: "2 nights",
-    value: 0,
-    color: "#f97316",
-  },
-  {
-    duration: "3 nights",
-    value: 0,
-    color: "#eab308",
-  },
-  {
-    duration: "4-5 nights",
-    value: 0,
-    color: "#84cc16",
-  },
-  {
-    duration: "6-7 nights",
-    value: 0,
-    color: "#22c55e",
-  },
-  {
-    duration: "8-14 nights",
-    value: 0,
-    color: "#14b8a6",
-  },
-  {
-    duration: "15-21 nights",
-    value: 0,
-    color: "#3b82f6",
-  },
-  {
-    duration: "21+ nights",
-    value: 0,
-    color: "#a855f7",
-  },
+  { duration: "1 night", value: 0, color: "#4a90e2" }, // blue
+  { duration: "2 nights", value: 0, color: "#50e3c2" }, // teal
+  { duration: "3 nights", value: 0, color: "#b8e986" }, // lime
+  { duration: "4-5 nights", value: 0, color: "#f8e71c" }, // yellow
+  { duration: "6-7 nights", value: 0, color: "#f5a623" }, // orange
+  { duration: "8-14 nights", value: 0, color: "#d0021b" }, // red
+  { duration: "15-21 nights", value: 0, color: "#9013fe" }, // purple
+  { duration: "21+ nights", value: 0, color: "#8b572a" }, // brown
 ];
 
 const startDataDark = [
-  {
-    duration: "1 night",
-    value: 0,
-    color: "#b91c1c",
-  },
-  {
-    duration: "2 nights",
-    value: 0,
-    color: "#c2410c",
-  },
-  {
-    duration: "3 nights",
-    value: 0,
-    color: "#a16207",
-  },
-  {
-    duration: "4-5 nights",
-    value: 0,
-    color: "#4d7c0f",
-  },
-  {
-    duration: "6-7 nights",
-    value: 0,
-    color: "#15803d",
-  },
-  {
-    duration: "8-14 nights",
-    value: 0,
-    color: "#0f766e",
-  },
-  {
-    duration: "15-21 nights",
-    value: 0,
-    color: "#1d4ed8",
-  },
-  {
-    duration: "21+ nights",
-    value: 0,
-    color: "#7e22ce",
-  },
+  { duration: "1 night", value: 0, color: "#1e90ff" },
+  { duration: "2 nights", value: 0, color: "#20c997" },
+  { duration: "3 nights", value: 0, color: "#8bc34a" },
+  { duration: "4-5 nights", value: 0, color: "#ffee58" },
+  { duration: "6-7 nights", value: 0, color: "#ffb74d" },
+  { duration: "8-14 nights", value: 0, color: "#ef5350" },
+  { duration: "15-21 nights", value: 0, color: "#ab47bc" },
+  { duration: "21+ nights", value: 0, color: "#6d4c41" },
 ];
 
 function prepareData(startData, stays) {
@@ -193,7 +134,7 @@ function DurationChart({ confirmedStays }) {
   }, []);
 
   return (
-    <ChartBox>
+    <ChartBox theme={isDarkMode ? "dark" : "light"}>
       <Heading as="h2">Stay duration summary</Heading>
 
       <ChartWrapper>
