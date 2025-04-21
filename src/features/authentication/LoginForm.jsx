@@ -6,6 +6,11 @@ import Form from "../../ui/Form";
 import Input from "../../ui/Input";
 import SpinnerMini from "../../ui/SpinnerMini";
 import FormRowVertical from "../../ui/FormRowVertical";
+import styled from "styled-components";
+
+const StyledForm = styled(Form)`
+  background-color: var(--color-grey-50);
+`;
 
 function LoginForm() {
   const [email, setEmail] = useState("matin@gmail.com");
@@ -30,7 +35,7 @@ function LoginForm() {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <FormRowVertical label="Email address">
         <Input
           type="email"
@@ -56,7 +61,7 @@ function LoginForm() {
           {!isLogin ? "Login" : <SpinnerMini />}
         </Button>
       </FormRowVertical>
-    </Form>
+    </StyledForm>
   );
 }
 
