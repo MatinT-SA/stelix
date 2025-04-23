@@ -21,6 +21,7 @@ import ProtectedRoute from "./ui/ProtectedRoute";
 import { DarkModeProvider } from "./context/DarkModeContext";
 
 function App() {
+  console.log("testing");
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
