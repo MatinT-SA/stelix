@@ -13,8 +13,8 @@ const StyledForm = styled(Form)`
 `;
 
 function LoginForm() {
-  const [email, setEmail] = useState("matin@gmail.com");
-  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const { isLogin, login } = useLogin();
 
