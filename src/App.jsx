@@ -49,7 +49,7 @@ function App() {
             },
             style: {
               fontSize: "1.6rem",
-              zIndex: "99999",
+              zIndex: "999999",
               maxWidth: "500px",
               padding: "1.6rem 2.4rem",
               backgroundColor: "var(--color-grey-0)",
