@@ -30,60 +30,68 @@ function App() {
   });
 
   return (
-    <DarkModeProvider>
-      <QueryClientProvider client={queryClient}>
-        <ReactQueryDevtools initialIsOpen={false} />
+    <>
+      <Toaster
+        position="top-center"
+        gutter={12}
+        containerStyle={{
+          margin: "8px",
+          position: "fixed",
+          zIndex: 100000,
+          pointerEvents: "none",
+        }}
+        toastOptions={{
+          success: {
+            duration: 3000,
+          },
+          error: {
+            duration: 5000,
+          },
+          style: {
+            fontSize: "1.6rem",
+            zIndex: "100000",
+            pointerEvents: "none",
+            maxWidth: "500px",
+            padding: "1.6rem 2.4rem",
+            backgroundColor: "var(--color-grey-0)",
+            color: "var(--color-grey-700)",
+          },
+          className: "my-toast",
+        }}
+      />
+      <DarkModeProvider>
+        <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools initialIsOpen={false} />
 
-        <GlobalStyles />
+          <GlobalStyles />
 
-        <Toaster
-          position="top-center"
-          gutter={12}
-          containerStyle={{ margin: "8px" }}
-          toastOptions={{
-            success: {
-              duration: 3000,
-            },
-            error: {
-              duration: 5000,
-            },
-            style: {
-              fontSize: "1.6rem",
-              zIndex: "999999",
-              maxWidth: "500px",
-              padding: "1.6rem 2.4rem",
-              backgroundColor: "var(--color-grey-0)",
-              color: "var(--color-grey-700)",
-            },
-          }}
-        />
+          <BrowserRouter>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate replace to="dashboard" />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="account" element={<Account />} />
+                <Route path="bookings" element={<Bookings />} />
+                <Route path="bookings/:bookingId" element={<Booking />} />
+                <Route path="checkin/:bookingId" element={<Checkin />} />
+                <Route path="cabins" element={<Cabins />} />
+                <Route path="settings" element={<Settings />} />
+                <Route path="users" element={<Users />} />
+              </Route>
 
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate replace to="dashboard" />} />
-              <Route path="dashboard" element={<Dashboard />} />
-              <Route path="account" element={<Account />} />
-              <Route path="bookings" element={<Bookings />} />
-              <Route path="bookings/:bookingId" element={<Booking />} />
-              <Route path="checkin/:bookingId" element={<Checkin />} />
-              <Route path="cabins" element={<Cabins />} />
-              <Route path="settings" element={<Settings />} />
-              <Route path="users" element={<Users />} />
-            </Route>
-
-            <Route path="login" element={<Login />} />
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </QueryClientProvider>
-    </DarkModeProvider>
+              <Route path="login" element={<Login />} />
+              <Route path="*" element={<PageNotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </QueryClientProvider>
+      </DarkModeProvider>
+    </>
   );
 }
 

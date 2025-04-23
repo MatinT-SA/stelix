@@ -26,14 +26,19 @@ const StyledModal = styled.div`
 
 const Overlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
+  inset: 0;
   background-color: var(--backdrop-color);
-  backdrop-filter: blur(4px);
   z-index: 99999;
-  transition: all 0.5s;
+  pointer-events: auto;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px); /* for Safari */
+    z-index: -1;
+  }
 `;
 
 const Button = styled.button`
