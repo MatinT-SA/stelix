@@ -5,13 +5,13 @@ import TableOperations from "../../ui/TableOperations";
 
 const StyledTableOperations = styled(TableOperations)`
   display: flex;
-  gap: 1rem; /* Adjust gap as needed */
+  gap: 1rem;
   align-items: center;
 
   @media (max-width: 650px) {
     flex-direction: column;
-    align-items: stretch; /* Optional: makes children take full width */
-    gap: 1rem; /* Adjust gap for the column layout */
+    align-items: stretch;
+    gap: 1rem;
   }
 `;
 

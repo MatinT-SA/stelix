@@ -4,7 +4,6 @@ import { HiMenu, HiX } from "react-icons/hi";
 import MainNav from "./MainNav";
 import Logo from "../ui/Logo";
 
-// Sidebar styles
 const SidebarContainer = styled.aside`
   width: 26rem;
   background-color: var(--color-grey-100);

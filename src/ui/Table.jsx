@@ -9,7 +9,7 @@ const StyledTable = styled.div`
   overflow: hidden;
 
   @media (max-width: 800px) {
-    min-width: 700px; /* or whatever size is needed for full content */
+    min-width: 700px;
   }
 `;
 
@@ -50,7 +50,6 @@ const Footer = styled.footer`
   justify-content: center;
   padding: 1.2rem;
 
-  /* This will hide the footer when it contains no child elements. Possible thanks to the parent selector :has 🎉 */
   &:not(:has(*)) {
     display: none;
   }
