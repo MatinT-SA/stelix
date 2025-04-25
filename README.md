@@ -17,7 +17,7 @@ Stelix is a fully responsive web application built with React and Vite, designed
 ## Features
 ✅ **Fast & Optimized** – Powered by Vite for ultra-fast build times ⚡  
 🎨 **Modern UI** – Designed with responsiveness in mind, offering a clean and intuitive interface  
-🛠 State Management – Efficient data handling for smooth user interactions, powered by React Query.
+🛠 **State Management** – Efficient data handling for smooth user interactions, powered by React Query.
 🔍 **Advanced Concepts** – Leverages React's latest features and best practices  
 🌍 **Smooth Navigation** – Integrated with React Router DOM for page transitions  
 
