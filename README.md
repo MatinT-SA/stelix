@@ -65,10 +65,11 @@ Ensure you have Node.js and npm installed on your system.
 ## Live Demo
 🔗 Stelix Live Demo: https://stelix.netlify.app
 
-**NOTE**:
-email address: matin@gmail.com
-password: 12345678
-[for testing purposes]
+**NOTE**: for testing purposes {
+
+   email address: matin@gmail.com
+   password: 12345678
+   }
 
 ## Contributing
 Contributions are welcome! To contribute:
