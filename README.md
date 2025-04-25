@@ -1,5 +1,7 @@
 # Stelix
 
+![stelix](https://github.com/user-attachments/assets/57ae6d20-9fc4-4dd5-8edd-bb31b19c5efa)
+
 ## Table of Contents
 - [Description](#description)
 - [Features](#features)
