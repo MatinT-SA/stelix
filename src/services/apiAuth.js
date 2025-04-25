@@ -45,17 +45,22 @@ export async function logout() {
 }
 
 export async function updateCurrentUser({ password, fullName, avatar }) {
+  const user = await getCurrentUser();
+
+  // 🚫 Block updates for the demo account
+  if (user?.email === "test@gmail.com") {
+    throw new Error("Demo user cannot update credentials.");
+  }
+
   let updateUser;
   if (password) updateUser = { password };
   if (fullName) updateUser = { data: { fullName } };
 
   const { error, data } = await supabase.auth.updateUser(updateUser);
-
   if (error) throw new Error(error.message);
   if (!avatar) return data;
 
   const fileName = `avatar-${data.user.id}-${Math.random()}`;
-
   const { error: ErrorStorage } = await supabase.storage
     .from("avatars")
     .upload(fileName, avatar);
