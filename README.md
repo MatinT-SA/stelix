@@ -15,11 +15,14 @@
 Stelix is a fully responsive web application built with React and Vite, designed for managing hotel check-ins. The project incorporates advanced React concepts to deliver a seamless and interactive user experience.
 
 ## Features
-✅ **Fast & Optimized** – Powered by Vite for ultra-fast build times ⚡  
-🎨 **Modern UI** – Designed with responsiveness in mind, offering a clean and intuitive interface  
-🛠 **State Management** – Efficient data handling for smooth user interactions, powered by React Query.
-🔍 **Advanced Concepts** – Leverages React's latest features and best practices  
-🌍 **Smooth Navigation** – Integrated with React Router DOM for page transitions  
+✅ Fast & Optimized – Powered by Vite for ultra-fast build times ⚡
+🎨 Modern UI – Designed with responsiveness in mind, offering a clean and intuitive interface
+🛠 State Management – Efficient data handling for smooth user interactions, powered by React Query
+🔍 Form Handling – Simplified form management using React Hook Form
+🔔 Notifications – Real-time notifications with React Hot Toast
+🌐 Routing – Smooth navigation and routing with React Router DOM
+📊 Data Visualization – Stunning charts and graphs using Recharts
+🎨 Styled Components – Customizable and reusable styled components for consistent UI
 
 ## Technologies Used
 - **React** (Frontend UI)
