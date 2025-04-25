@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { HiMenu, HiX } from "react-icons/hi";
+import { HiX } from "react-icons/hi";
 import MainNav from "./MainNav";
 import Logo from "../ui/Logo";
 
@@ -28,7 +28,7 @@ const SidebarContainer = styled.aside`
 
 const SidebarHeader = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
 `;
