@@ -63,7 +63,7 @@ Ensure you have Node.js and npm installed on your system.
 - Enjoy real-time updates and seamless user interactions.
 
 ## Live Demo
-🔗 Stelix Live Demo (Add your live demo link here)
+🔗 Stelix Live Demo: https://stelix.netlify.app
 
 ## Contributing
 Contributions are welcome! To contribute:
