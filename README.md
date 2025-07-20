@@ -67,7 +67,7 @@ Ensure you have Node.js and npm installed on your system.
 
 **NOTE**: for testing purposes {
 
-   email address: matin@gmail.com,
+   email address: test@gmail.com,
    
    password: 12345678
    
