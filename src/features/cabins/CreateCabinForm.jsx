@@ -117,6 +117,15 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
         />
       </ResponsiveFormRow>
 
+      <ResponsiveFormRow label="location" error={errors?.location?.message}>
+        <Input
+          type="text"
+          disabled={isWorking}
+          id="location"
+          {...register("location")}
+        />
+      </ResponsiveFormRow>
+
       <ResponsiveFormRow
         label="description"
         error={errors?.description?.message}

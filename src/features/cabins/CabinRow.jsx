@@ -36,6 +36,13 @@ const Discount = styled.div`
   color: var(--color-green-700);
 `;
 
+const Location = styled.div`
+  font-family: "Sono";
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: var(--color-grey-400);
+`;
+
 function CabinRow({ cabin }) {
   const { isDeleting, deleteCabin } = useDeleteCabin();
 
@@ -49,6 +56,7 @@ function CabinRow({ cabin }) {
     discount,
     image,
     description,
+    location,
   } = cabin;
 
   function handleDuplicate() {
@@ -59,6 +67,7 @@ function CabinRow({ cabin }) {
       discount,
       image,
       description,
+      location,
     });
   }
 
@@ -77,6 +86,8 @@ function CabinRow({ cabin }) {
       ) : (
         <span>&mdash;</span>
       )}
+
+      <Location>{location || "-"}</Location>
 
       <div>
         <Modal>

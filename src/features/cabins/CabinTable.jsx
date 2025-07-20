@@ -47,13 +47,14 @@ function CabinTable() {
   return (
     <Menus>
       <ScrollWrapper>
-        <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr">
+        <Table columns="0.6fr 1.8fr 2.2fr 1fr 1fr 1fr .5fr">
           <Table.Header role="row">
             <div></div>
             <div>Cabin</div>
             <div>Capacity</div>
             <div>Price</div>
             <div>Discount</div>
+            <div>Location</div>
             <div></div>
           </Table.Header>
 
