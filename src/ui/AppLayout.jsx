@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import styled, { css } from "styled-components";
-import Uploader from "../data/Uploader";
+// import Uploader from "../data/Uploader";
 import { useDarkMode } from "../context/DarkModeContext";
 
 const StyledAppLayout = styled.div`
