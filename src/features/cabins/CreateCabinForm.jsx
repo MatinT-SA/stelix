@@ -122,7 +122,12 @@ function CreateCabinForm({ cabinToEdit = {}, onCloseModal }) {
           type="text"
           disabled={isWorking}
           id="location"
-          {...register("location")}
+          {...register("location", {
+            maxLength: {
+              value: 40,
+              message: "Location must be at most 40 characters",
+            },
+          })}
         />
       </ResponsiveFormRow>
 
